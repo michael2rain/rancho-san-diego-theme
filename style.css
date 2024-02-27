@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Semántica Devs
 Author URI: https://semantica.mx/
 Description: Tema desarrollado para Hotel Rancho San Diego
-Version: 1.0.0
+Version: 1.0.2
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -1042,6 +1042,42 @@ textarea {
 	color: var(--hrsd-color-featured);
 }
 
+/* Nav Menu */
+#hrsdMenu {
+	--padding-item: .25rem 1.5rem;
+}
+
+#hrsdMenu>div>nav>ul>li {
+	overflow: hidden;
+	transition: all cubic-bezier(0.72, 0.16, 0.345, 0.875);
+	transition-duration: .2s;
+}
+
+#hrsdMenu>div>nav>ul>li>a {
+	padding: var(--padding-item);
+	margin: 0;
+}
+
+#hrsdMenu>div>nav>ul>li>a:hover {
+	transform: translateY(-100%);
+}
+
+#hrsdMenu>div>nav>ul>li>.elementor-item-active:hover {
+	transform: none;
+}
+
+#hrsdMenu>div>nav>ul>li>a::before {
+	color: #fff;
+	background: none;
+	padding: var(--padding-item);
+	font-weight: 500;
+	content: attr(data-hover);
+	position: absolute;
+	left: 0;
+	top: 100%;
+	transform: translateY(0%);
+}
+
 /*Main*/
 #primary {
 	max-width: 1180px;
@@ -1055,4 +1091,46 @@ textarea {
 	margin: 0 auto;
 	padding: 2em 1em;
 	border-top: 1px solid #eee;
+}
+
+/*Buttons*/
+.btn {
+	cursor: pointer;
+	border-radius: 50px;
+	overflow: hidden;
+	box-shadow: 0px 16px 48px rgba(201, 169, 106, 0.16);
+	transition: box-shadow .4s ease-in-out;
+}
+
+.btn::before {
+	content: '';
+	background: rgba(255, 255, 255, 0.1);
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 1;
+	transform: translateX(-100%) skewX(-15deg);
+	transition: transform .4s ease-in-out;
+}
+
+.btn:hover::before {
+	transform: translateX(100%) skewX(-15deg);
+	opacity: 1;
+}
+
+.btn::before {
+	content: '';
+	background: rgba(255, 255, 255, 0.1);
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 1;
+	transform: translateX(-100%) skewX(-15deg);
+	transition: transform .4s ease-in-out;
 }
