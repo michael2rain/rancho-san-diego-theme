@@ -1,10 +1,10 @@
 /*!
-Theme Name: Hotel Rancho San Diego
+Theme Name: Hotel Rancho San Diego - DEV
 Theme URI: http://underscores.me/
 Author: Semántica Devs
 Author URI: https://semantica.mx/
 Description: Tema desarrollado para Hotel Rancho San Diego
-Version: 1.0.3
+Version: 1.0.4
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -745,11 +745,6 @@ textarea {
 	display: block;
 }
 
-.post,
-.page {
-	margin: 0 0 1.5em;
-}
-
 .updated:not(.published) {
 	display: none;
 }
@@ -1301,4 +1296,33 @@ textarea {
 
 .itemRoom__heading>div>h3 {
 	text-wrap: balance;
+}
+
+/* Swiper slide: Habitaciones */
+:is(#swiperInit>div) .elementor-grid {
+	display: flex;
+	gap: 1.25rem;
+	padding: 0 2rem;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	scroll-snap-type: x mandatory;
+
+	& div {
+		flex: none;
+		width: calc(100vw - 20%);
+		scroll-snap-align: center;
+	}
+}
+
+@media (min-width: 1280px) {
+	:is(#swiperInit>div) .elementor-grid {
+		gap: 2.25rem;
+		padding: 0;
+
+		& div {
+			flex: none;
+			width: 381px;
+			scroll-snap-align: center;
+		}
+	}
 }
