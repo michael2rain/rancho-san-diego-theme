@@ -17,13 +17,17 @@ document.addEventListener('DOMContentLoaded', navDataHover)
 /**
  * Intercambiar clases para efecto de sticky header.
  */
-const stickyHeader = () => {
-	const header = document.getElementById('hrsdHeader');
-	if (!header) {
-		return;
+const stickyHeader = (header) => {
+	if (window.scrollY > 150) {
+		header.classList.add("stickyOn");
+		header.classList.remove("stickyOff");
+	} else {
+		header.classList.add("stickyOff");
+		header.classList.remove("stickyOn");
 	}
-	window.scrollY > 150
-		? (header.classList.add("stickyOn"), header.classList.remove("stickyOff"))
-		: (header.classList.add("stickyOff"), header.classList.remove("stickyOn"));
 }
-document.addEventListener('scroll', stickyHeader);
+document.addEventListener('DOMContentLoaded', () => {
+	const getHeader = document.getElementById('hrsdHeader');
+	!getHeader ? null : stickyHeader(getHeader);
+	window.addEventListener('scroll', () => stickyHeader(getHeader));
+});
