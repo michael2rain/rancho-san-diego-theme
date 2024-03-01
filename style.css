@@ -1314,7 +1314,7 @@ textarea {
 	}
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
 	:is(#swiperInit>div) .elementor-grid {
 		gap: 2.25rem;
 		padding: 0;
