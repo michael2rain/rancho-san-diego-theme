@@ -1058,8 +1058,35 @@ textarea {
 # Hotel Rancho San Diego Theme
 --------------------------------------------------------------*/
 
+
+/* Estilos por defecto
+--------------------------------------------------------------*/
+:is(body.page-template-default) #primary {
+	padding: 2rem 1.5rem 4rem;
+}
+
+@media (min-width: 768px) {
+	:is(body.page-template-default) #primary {
+		padding: 2rem 5rem 4rem;
+	}
+
+}
+
+@media (min-width: 1024px) {
+	:is(body.page-template-default) #primary {
+		width: 900px;
+		padding: 4rem 5rem 8rem;
+	}
+
+}
+
+
+/* Elementor custom CSS
+--------------------------------------------------------------*/
+
 /* Header */
-#hrsdHeader.stickyOn {
+#hrsdHeader.stickyOn,
+:is(body.page-template-default) #hrsdHeader {
 	background: linear-gradient(90deg, rgba(249, 250, 251, 1) 0%, rgba(249, 250, 251, 0.9) 50%, rgba(249, 250, 251, 1) 100%);
 	color: #222;
 	--min-height: 100px;
@@ -1069,8 +1096,20 @@ textarea {
 	-webkit-backdrop-filter: blur(5px);
 }
 
+:is(body.page-template-default) #hrsdHeader {
+	box-shadow: none;
+	border-bottom: 1px solid #eee;
+	--min-height: 120px;
+	transition: min-height 0.3s cubic-bezier(0.72, 0.16, 0.345, 0.875);
+}
+
+:is(body.page-template-default) #hrsdHeader.stickyOn {
+	box-shadow: none;
+}
+
 /* Sticky Menu */
-:is(#hrsdHeader.stickyOn) :is(#hrsdMenu nav:nth-child(2)) a {
+:is(#hrsdHeader.stickyOn) :is(#hrsdMenu nav:nth-child(2)) a,
+:is(body.page-template-default) :is(#hrsdMenu nav:nth-child(2)) a {
 	color: #222;
 
 	&::before {
@@ -1093,13 +1132,15 @@ textarea {
 	animation: var(--header-transition);
 }
 
-:is(#hrsdHeader.stickyOn) #blackLogo {
-	display: block;
+:is(#hrsdHeader.stickyOn) #blackLogo,
+:is(body.page-template-default) #blackLogo {
+	display: block !important;
 	animation: fade-out var(--header-transition);
 	transform: scale(0.8);
 }
 
-:is(#hrsdHeader.stickyOn) #whiteLogo {
+:is(#hrsdHeader.stickyOn) #whiteLogo,
+:is(body.page-template-default) #whiteLogo {
 	display: none;
 	animation: var(--header-transition);
 }
@@ -1108,6 +1149,16 @@ textarea {
 	:is(#hrsdHeader.stickyOn) #blackLogo {
 		transform: none;
 		width: 100px;
+	}
+
+	:is(body.page-template-default) #blackLogo {
+		width: 110px !important;
+		transform: scale(1);
+	}
+
+	:is(body.page-template-default) #hrsdHeader.stickyOn #blackLogo {
+		transform: none;
+		transform: scale(1);
 	}
 }
 
@@ -1163,6 +1214,10 @@ textarea {
 
 :is(#hrsdHeader.stickyOn) div[aria-label="Menu Toggle"] {
 	color: var(--color-text)
+}
+
+:is(body.page-template-default) :is(#hrsdMenu) .elementor-menu-toggle {
+	color: var(--color-text);
 }
 
 /* Dropdown Nav Menu */
@@ -1232,9 +1287,9 @@ textarea {
 
 /* CTA Button */
 
-.btn:has(#hrsdHeader) {
+/* .btn:has(#hrsdHeader) {
 	background-color: red;
-}
+} */
 
 
 /*Buttons*/
