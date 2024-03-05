@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Semántica Devs
 Author URI: https://semantica.mx/
 Description: Tema desarrollado para Hotel Rancho San Diego
-Version: 1.0.5
+Version: 1.0.6
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -1061,19 +1061,27 @@ textarea {
 
 /* Estilos por defecto
 --------------------------------------------------------------*/
-:is(body.page-template-default) #primary {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) #primary {
 	padding: 2rem 1.5rem 4rem;
 }
 
 @media (min-width: 768px) {
-	:is(body.page-template-default) #primary {
+
+	:is(body.page-template-default,
+		body.page-template-instalations,
+		body.error404) #primary {
 		padding: 2rem 5rem 4rem;
 	}
 
 }
 
 @media (min-width: 1024px) {
-	:is(body.page-template-default) #primary {
+
+	:is(body.page-template-default,
+		body.page-template-instalations,
+		body.error404) #primary {
 		width: 900px;
 		padding: 4rem 5rem 8rem;
 	}
@@ -1086,7 +1094,9 @@ textarea {
 
 /* Header */
 #hrsdHeader.stickyOn,
-:is(body.page-template-default) #hrsdHeader {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) #hrsdHeader {
 	background: linear-gradient(90deg, rgba(249, 250, 251, 1) 0%, rgba(249, 250, 251, 0.9) 50%, rgba(249, 250, 251, 1) 100%);
 	color: #222;
 	--min-height: 100px;
@@ -1096,20 +1106,26 @@ textarea {
 	-webkit-backdrop-filter: blur(5px);
 }
 
-:is(body.page-template-default) #hrsdHeader {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) #hrsdHeader {
 	box-shadow: none;
 	border-bottom: 1px solid #eee;
 	--min-height: 120px;
 	transition: min-height 0.3s cubic-bezier(0.72, 0.16, 0.345, 0.875);
 }
 
-:is(body.page-template-default) #hrsdHeader.stickyOn {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) #hrsdHeader.stickyOn {
 	box-shadow: none;
 }
 
 /* Sticky Menu */
 :is(#hrsdHeader.stickyOn) :is(#hrsdMenu nav:nth-child(2)) a,
-:is(body.page-template-default) :is(#hrsdMenu nav:nth-child(2)) a {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) :is(#hrsdMenu nav:nth-child(2)) a {
 	color: #222;
 
 	&::before {
@@ -1133,14 +1149,18 @@ textarea {
 }
 
 :is(#hrsdHeader.stickyOn) #blackLogo,
-:is(body.page-template-default) #blackLogo {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) #blackLogo {
 	display: block !important;
 	animation: fade-out var(--header-transition);
 	transform: scale(0.8);
 }
 
 :is(#hrsdHeader.stickyOn) #whiteLogo,
-:is(body.page-template-default) #whiteLogo {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) #whiteLogo {
 	display: none;
 	animation: var(--header-transition);
 }
@@ -1151,12 +1171,16 @@ textarea {
 		width: 100px;
 	}
 
-	:is(body.page-template-default) #blackLogo {
+	:is(body.page-template-default,
+		body.page-template-instalations,
+		body.error404) #blackLogo {
 		width: 110px !important;
 		transform: scale(1);
 	}
 
-	:is(body.page-template-default) #hrsdHeader.stickyOn #blackLogo {
+	:is(body.page-template-default,
+		body.page-template-instalations,
+		body.error404) #hrsdHeader.stickyOn #blackLogo {
 		transform: none;
 		transform: scale(1);
 	}
@@ -1216,7 +1240,9 @@ textarea {
 	color: var(--color-text)
 }
 
-:is(body.page-template-default) :is(#hrsdMenu) .elementor-menu-toggle {
+:is(body.page-template-default,
+	body.page-template-instalations,
+	body.error404) :is(#hrsdMenu) .elementor-menu-toggle {
 	color: var(--color-text);
 }
 
@@ -1379,5 +1405,75 @@ textarea {
 			width: 381px;
 			scroll-snap-align: center;
 		}
+	}
+}
+
+/* Filtro de instalaciones */
+:is(#instalationsGrid) .elementor-grid {
+	--max-item-width: 46%;
+	display: flex;
+	flex-wrap: wrap;
+
+	& div[data-elementor-type="loop-item"] {
+		flex: none;
+		width: var(--max-item-width);
+	}
+}
+
+:is(#filterContainer) ul {
+	column-gap: 1.75rem;
+	padding-left: .5rem;
+
+	& li {
+		flex: none;
+		cursor: pointer;
+		margin: 0;
+	}
+
+	& li>span.active {
+		color: var(--e-global-color-primary);
+	}
+}
+
+/* Applied classes */
+.item-fade-out {
+	animation: item-fade-out 0.35s ease forwards;
+}
+
+.item-fade-in {
+	animation: item-fade-in 0.35s ease forwards;
+}
+
+/* Keyframe animations */
+@keyframes item-fade-out {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		display: none;
+	}
+
+	100% {
+		opacity: 0;
+		width: 0;
+		display: none;
+	}
+}
+
+@keyframes item-fade-in {
+	0% {
+		opacity: 0;
+		width: 0;
+	}
+
+	50% {
+		display: block;
+	}
+
+	100% {
+		opacity: 1;
+		width: var(--max-item-width);
+		display: block;
 	}
 }

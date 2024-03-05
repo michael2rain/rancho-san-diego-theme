@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.5' );
+	define( '_S_VERSION', '1.0.6' );
 }
 
 /**
@@ -146,6 +146,21 @@ function hotel_rancho_san_diego_theme_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
+	// Instalations filter script
+    if ( is_page_template( 'instalations.php' ) ) {
+
+		$taxonomy = 'publicos-recomendados';
+		$taxonomy_terms = get_terms( $taxonomy, array(
+			'hide_empty' => true,
+			'fields' => 'names'
+		) );
+
+        wp_enqueue_script( 'instalations-filter', get_template_directory_uri() . '/js/instalations-filter.js', array(), _S_VERSION, true );
+        wp_localize_script( 'instalations-filter', 'publicTerms', array(
+            'names' => $taxonomy_terms
+        ) );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'hotel_rancho_san_diego_theme_scripts' );
 

@@ -28,6 +28,8 @@ const stickyHeader = (header) => {
 }
 document.addEventListener('DOMContentLoaded', () => {
 	const getHeader = document.getElementById('hrsdHeader');
-	!getHeader ? null : stickyHeader(getHeader);
-	window.addEventListener('scroll', () => stickyHeader(getHeader));
+	!getHeader ? null : (
+		stickyHeader(getHeader),
+		window.addEventListener('scroll', () => stickyHeader(getHeader))
+	);
 });
