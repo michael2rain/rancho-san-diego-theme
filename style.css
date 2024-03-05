@@ -1410,13 +1410,12 @@ textarea {
 
 /* Filtro de instalaciones */
 :is(#instalationsGrid) .elementor-grid {
-	--max-item-width: 46%;
 	display: flex;
 	flex-wrap: wrap;
 
 	& div[data-elementor-type="loop-item"] {
 		flex: none;
-		width: var(--max-item-width);
+		width: calc(50% - 15px);
 	}
 }
 
@@ -1435,45 +1434,10 @@ textarea {
 	}
 }
 
-/* Applied classes */
-.item-fade-out {
-	animation: item-fade-out 0.35s ease forwards;
+.iso-grid {
+	height: 2870px;
 }
 
-.item-fade-in {
-	animation: item-fade-in 0.35s ease forwards;
-}
-
-/* Keyframe animations */
-@keyframes item-fade-out {
-	0% {
-		opacity: 1;
-	}
-
-	50% {
-		display: none;
-	}
-
-	100% {
-		opacity: 0;
-		width: 0;
-		display: none;
-	}
-}
-
-@keyframes item-fade-in {
-	0% {
-		opacity: 0;
-		width: 0;
-	}
-
-	50% {
-		display: block;
-	}
-
-	100% {
-		opacity: 1;
-		width: var(--max-item-width);
-		display: block;
-	}
+.iso-item {
+	margin-bottom: 2.5rem;
 }

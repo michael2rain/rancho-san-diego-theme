@@ -156,8 +156,10 @@ function hotel_rancho_san_diego_theme_scripts() {
 			'fields' => 'names'
 		) );
 
-        wp_enqueue_script( 'instalations-filter', get_template_directory_uri() . '/js/instalations-filter.js', array(), _S_VERSION, true );
-        wp_localize_script( 'instalations-filter', 'publicTerms', array(
+		wp_enqueue_script( 'isotope-js', get_template_directory_uri() . '/js/isotope.pkgd.min.js', array(), _S_VERSION, true );
+        //wp_enqueue_script( 'instalations-filter', get_template_directory_uri() . '/js/instalations-filter.js', array(), _S_VERSION, true );
+		wp_enqueue_script( 'isotope-init', get_template_directory_uri() . '/js/isotope-init.js', array(), _S_VERSION, true );
+        wp_localize_script( 'isotope-init', 'publicTerms', array(
             'names' => $taxonomy_terms
         ) );
     }
