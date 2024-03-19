@@ -1053,6 +1053,14 @@ textarea {
 	border-top: 1px solid #eee;
 }
 
+/* Utils */
+.pretty-parragraph {
+	text-wrap: pretty;
+}
+
+.balance-parragraph {
+	text-wrap: balance;
+}
 
 /*--------------------------------------------------------------
 # Hotel Rancho San Diego Theme
@@ -1306,20 +1314,10 @@ textarea {
 	}
 }
 
-/* z-index: 9999;
-	    position: absolute;
-	    bottom: -50vh;
-	    right: 25%; */
-
-/* CTA Button */
-
-/* .btn:has(#hrsdHeader) {
-	background-color: red;
-} */
-
 
 /*Buttons*/
-.btn {
+.btn,
+:is(#eventsForm > div) .e-form__buttons>button {
 	cursor: pointer;
 	border-radius: 50px;
 	overflow: hidden;
@@ -1327,7 +1325,8 @@ textarea {
 	transition: box-shadow .4s ease-in-out;
 }
 
-.btn::before {
+.btn::before,
+:is(#eventsForm > div) .e-form__buttons>button::before {
 	content: '';
 	background: rgba(255, 255, 255, 0.1);
 	display: block;
@@ -1341,12 +1340,14 @@ textarea {
 	transition: transform .4s ease-in-out;
 }
 
-.btn:hover::before {
+.btn:hover::before,
+:is(#eventsForm > div) .e-form__buttons>button:hover::before {
 	transform: translateX(100%) skewX(-15deg);
 	opacity: 1;
 }
 
-.btn::before {
+.btn::before,
+:is(#eventsForm > div) .e-form__buttons>button::before {
 	content: '';
 	background: rgba(255, 255, 255, 0.1);
 	display: block;
@@ -1379,24 +1380,121 @@ textarea {
 	text-wrap: balance;
 }
 
-/* Swiper slide: Habitaciones */
-:is(#swiperInit>div) .elementor-grid {
+.itemRoom__image {
+	transition: transform .3s ease-in-out;
+}
+
+.itemRoom__image:hover {
+	transform: scale(1.1);
+}
+
+/* 
+ * Swiper slide: Habitaciones 
+ */
+#swiperInit>.swiper-container {
+	overflow: hidden;
+	border-radius: 6px;
+}
+
+/* Buttons */
+:is(#swiperInit) .swiper-button-next,
+:is(#swiperInit) .swiper-button-prev {
+	border-radius: 0;
+	min-height: 4rem;
+	width: fit-content;
+	background: linear-gradient(90deg, rgba(249, 250, 251, 1) 0%, rgba(249, 250, 251, 0.9) 50%, rgba(249, 250, 251, 1) 100%);
+	backdrop-filter: blur(5px);
+	z-index: 10;
+	opacity: 0.8;
+	transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+
+	&::after {
+		font-family: "hrsd-icons";
+		content: '\e800';
+		font-size: 3rem;
+		color: var(--e-global-color-e82bb6f);
+	}
+
+	&:hover {
+		opacity: 1;
+		box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	}
+
+	&:active {
+		opacity: 1;
+		box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+		filter: brightness(0.99);
+	}
+}
+
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+	opacity: 0 !important;
+}
+
+:is(#swiperInit) .swiper-button-prev {
+	right: 5rem;
+	transform: rotate(180deg) translate(70%, 0);
+
+	&:hover {
+		transform: translate(-80%, 0) rotate(180deg);
+	}
+}
+
+:is(#swiperInit) .swiper-button-next {
+	right: 0;
+	transform: translate(50%, 0);
+
+	&:hover {
+		transform: translate(60%, 0);
+	}
+}
+
+/* Pagination */
+:is(#swiperInit) .swiper-pagination {
+	--swiper-theme-color: #cca86f;
+	--swiper-pagination-bullet-size: 10px;
+	--swiper-pagination-bullet-horizontal-gap: 0px;
+	--swiper-pagination-bullet-inactive-opacity: 0.08;
+
+	display: flex;
+	justify-content: center;
+	column-gap: 1rem;
+	bottom: -3rem;
+}
+
+:is(#swiperInit) .swiper-pagination-bullet.swiper-pagination-bullet-active {
+	transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+	width: 1rem;
+	border-radius: 1rem;
+}
+
+/* Container */
+:is(#swiperInit>div) .elementor-loop-container {
+	grid-column-gap: 0;
+	grid-row-gap: 0;
+}
+
+:is(#swiperInit>div) .elementor-loop-container:not(.swiper-wrapper) {
 	display: flex;
 	gap: 1.25rem;
-	padding: 0 2rem;
 	overflow-x: scroll;
 	overflow-y: hidden;
 	scroll-snap-type: x mandatory;
+	padding: 0 2rem;
 
 	& div {
 		flex: none;
 		width: calc(100vw - 20%);
 		scroll-snap-align: center;
 	}
+
 }
 
 @media (min-width: 1024px) {
-	:is(#swiperInit>div) .elementor-grid {
+	:is(#swiperInit>div) .elementor-loop-container:not(.swiper-wrapper) {
+		overflow: hidden;
 		gap: 2.25rem;
 		padding: 0;
 
@@ -1408,14 +1506,29 @@ textarea {
 	}
 }
 
-/* Filtro de instalaciones */
-:is(#instalationsGrid) .elementor-grid {
+/**
+ * Isotope Filter
+*/
+:is(#instalationsGrid) .elementor-loop-container {
 	display: flex;
 	flex-wrap: wrap;
+	opacity: 0;
+	transform: translateY(10%);
 
 	& div[data-elementor-type="loop-item"] {
 		flex: none;
 		width: calc(50% - 15px);
+	}
+}
+
+/* Remove styles in Elementor builder */
+:is(#instalationsGrid[draggable="true"]) .elementor-loop-container {
+	display: grid;
+	opacity: 1;
+	transform: none;
+
+	& div[data-elementor-type="loop-item"] {
+		width: 100%;
 	}
 }
 
@@ -1434,10 +1547,259 @@ textarea {
 	}
 }
 
-.iso-grid {
+:is(#instalationsGrid) .iso-grid {
 	height: 2870px;
+	opacity: 1;
+	transition: all .4s cubic-bezier(0.72, 0.16, 0.345, 0.875);
+	transform: translateY(0);
 }
 
 .iso-item {
-	margin-bottom: 2.5rem;
+	margin-bottom: 2.75rem;
+
+	& .elementor-post-info__item-prefix {
+		color: var(--e-global-color-e82bb6f);
+	}
+}
+
+@media (max-width: 640px) {
+	:is(#instalationsGrid) .elementor-loop-container {
+		& div[data-elementor-type="loop-item"] {
+			flex: none;
+			width: 100%;
+		}
+	}
+}
+
+
+/**
+ * Página: Eventos
+*/
+
+div.contact-header:before {
+	content: '';
+	background-color: #fcfcfc;
+	position: absolute;
+	width: 60vw;
+}
+
+
+/* Slider */
+:is(#eventsSwiper) .swiper {
+	max-width: 1240px;
+	overflow: visible;
+}
+
+:is(#eventsSwiper) .elementor-swiper-button {
+	width: 4rem;
+	height: 4rem;
+	color: var(--color-text);
+	background-color: #fcfcfc;
+	font-size: 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+:is(#eventsSwiper) .elementor-swiper-button-prev {
+	transform: translate(-620px, -48px) rotate(180deg);
+
+	&:hover {
+		background-color: #f1f1f1;
+	}
+}
+
+:is(#eventsSwiper) .elementor-swiper-button-next {
+	transform: translate(-556px, -112px);
+
+	&:hover {
+		background-color: #f1f1f1;
+	}
+}
+
+/* Form */
+
+:is(#eventsForm > div) .e-form__buttons {
+	margin-top: 1rem;
+	max-width: fit-content;
+	overflow: hidden;
+	border-radius: 50px;
+}
+
+:is(#eventsForm > div) input,
+textarea {
+	padding-left: 2.6rem;
+
+	&:focus-visible {
+		box-shadow: 0px 4px 10px rgba(201, 169, 106, 0.12);
+	}
+}
+
+:is(#eventsForm > div) label:before {
+	font-family: "hrsd-icons";
+	font-size: 1.125rem;
+	position: absolute;
+	width: 1.125rem;
+	height: 1.125rem;
+	left: 1.125rem;
+	bottom: .9rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+:is(#eventsForm > div) label[for="form-field-name"]:before {
+	content: '\E806';
+}
+
+:is(#eventsForm > div) label[for="form-field-email"]:before {
+	content: '\E803';
+}
+
+:is(#eventsForm > div) label[for="form-field-phone"]:before {
+	content: '\E805';
+}
+
+@media (max-width: 640px) {
+	div.contact-header:before {
+		width: 100vw;
+	}
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+	div.contact-header:before {
+		width: 100vw;
+		background: linear-gradient(90deg, rgba(249, 250, 251, 1) 0%, rgba(249, 250, 251, 0.95) 50%, rgba(249, 250, 251, 1) 100%);
+		backdrop-filter: blur(5px);
+		-webkit-backdrop-filter: blur(5px);
+	}
+
+	a.events-page__tel-button {
+		position: relative;
+	}
+
+	:is(#eventsSwiper) .swiper {
+		max-width: calc(100vw - 2.5rem);
+		overflow: visible;
+	}
+
+	:is(#eventsSwiper) .elementor-swiper-button-prev,
+	:is(#eventsSwiper) .elementor-swiper-button-next {
+		display: none;
+	}
+}
+
+/* Laptops Mini */
+@media (max-width: 1024px) and (min-width: 768px) {
+	:is(#eventsSwiper) .swiper {
+		max-width: calc(100vw - 4rem);
+		overflow: visible;
+	}
+
+	:is(#eventsSwiper) .elementor-swiper-button-prev {
+		transform: translate(calc(-50vw + 2rem), -112px) rotate(180deg);
+	}
+
+	:is(#eventsSwiper) .elementor-swiper-button-next {
+		transform: translate(calc(-50vw + 6rem), -48px);
+	}
+}
+
+/**
+ * Página: Grand Spa
+*/
+
+.container-description {
+	margin-top: 1.5rem;
+	padding-bottom: 5rem;
+}
+
+#catServicesList {
+	display: none;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	column-gap: 1rem;
+	row-gap: 1rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	& li {
+		padding: 0.5rem .75rem;
+		cursor: pointer;
+		border-bottom: 1px solid var(--e-global-color-primary);
+
+		&:hover {
+			background-color: #f5f5f5;
+		}
+	}
+}
+
+@media (min-width: 1024px) {
+	#catServicesList {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.container-description {
+		margin-top: 4.5rem;
+		padding-bottom: 3.5rem;
+	}
+}
+
+.active-category {
+	background-color: var(--e-global-color-primary);
+	color: #fff;
+}
+
+.active-category:hover {
+	background-color: var(--e-global-color-primary) !important;
+}
+
+.category-description {
+	margin: 0;
+	text-wrap: pretty;
+	font-size: 1.2rem;
+}
+
+/* Mobile filter */
+select.category-select {
+	height: 3rem;
+	padding: 0.5rem;
+	border-radius: 6px;
+	border: 1px solid var(--e-global-color-primary);
+}
+
+@media (max-width: 768px) {
+	:is(.services-list) .elementor-shortcode {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+}
+
+/* loop item */
+#spaServices .hentry>div {
+	&:before {
+		content: attr(data-service-number);
+		color: var(--color-text);
+		position: absolute;
+		width: fit-content;
+		height: fit-content;
+		background: #fcfcfc;
+		top: -1rem;
+		padding-right: 1.5rem;
+		border: none;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		width: 3rem;
+		height: 1px;
+		background: var(--color-text);
+		left: 2.5rem;
+		z-index: 2;
+		top: -1px;
+	}
+
 }
