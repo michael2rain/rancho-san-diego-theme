@@ -1,10 +1,10 @@
 <?php
 /**
- * Hotel Rancho San Diego functions and definitions
+ * Rancho San Diego Theme functions and definitions
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package Hotel_Rancho_San_Diego
+ * @package Rancho_San_Diego_Theme
  */
 
 if ( ! defined( '_S_VERSION' ) ) {
@@ -23,7 +23,7 @@ function hotel_rancho_san_diego_theme_setup() {
 	/*
 		* Make theme available for translation.
 		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on Hotel Rancho San Diego, use a find and replace
+		* If you're building a theme based on Rancho San Diego Theme, use a find and replace
 		* to change 'hotel-rancho-san-diego-theme' to the name of your theme in all the template files.
 		*/
 	load_theme_textdomain( 'hotel-rancho-san-diego-theme', get_template_directory() . '/languages' );
