@@ -147,6 +147,11 @@ function hotel_rancho_san_diego_theme_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 
+	// Slider script on home page
+	if ( is_front_page() ) {
+		wp_enqueue_script( 'rooms-slider', get_template_directory_uri() . '/js/rooms-slider.js', array(), _S_VERSION, true );
+	}
+
 	// Instalations filter script
     if ( is_page_template( 'instalations.php' ) ) {
 
@@ -157,12 +162,15 @@ function hotel_rancho_san_diego_theme_scripts() {
 		) );
 
 		wp_enqueue_script( 'isotope-js', get_template_directory_uri() . '/js/isotope.pkgd.min.js', array(), _S_VERSION, true );
-        //wp_enqueue_script( 'instalations-filter', get_template_directory_uri() . '/js/instalations-filter.js', array(), _S_VERSION, true );
 		wp_enqueue_script( 'isotope-init', get_template_directory_uri() . '/js/isotope-init.js', array(), _S_VERSION, true );
         wp_localize_script( 'isotope-init', 'publicTerms', array(
             'names' => $taxonomy_terms
         ) );
     }
+
+	if ( is_page_template( 'spa.php' ) ) {
+		wp_enqueue_script( 'spa-filter', get_template_directory_uri() . '/js/spa-filter.js', array(), _S_VERSION, true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'hotel_rancho_san_diego_theme_scripts' );
 
@@ -193,3 +201,44 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Shortcodes
+*/
+
+// Función para registrar el shortcode
+function spa_category_services_shortcode($atts) {
+
+    $atts = shortcode_atts(array(
+        'taxonomy' => 'categoria-de-servicio',
+    ), $atts);
+
+    $terms = get_terms(array(
+        'taxonomy' => $atts['taxonomy'],
+        'hide_empty' => true,
+		'orderby' => 'count',
+		'order' => 'DESC'
+    ));
+
+    if (!empty($terms)) {
+
+        $output = '<ul id="catServicesList">';
+
+        foreach ($terms as $term) {
+            $name = $term->name;
+            $description = $term->description;
+
+			if (empty($description)) {
+				 $output .= '<li>' . $name . '</li>';
+			} else {
+				$output .= '<li data-category-desc="' . $description . '">' . $name . '</li>';
+			}
+        }
+
+        $output .= '</ul>';
+
+        return $output;
+    } else {
+        return 'No se encontraron términos en la taxonomía especificada.';
+    }
+}
+add_shortcode('spa_category_services', 'spa_category_services_shortcode');
