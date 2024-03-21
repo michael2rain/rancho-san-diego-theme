@@ -1232,6 +1232,75 @@ textarea {
 	transform: translateY(0%);
 }
 
+
+/* Lang Links */
+@media (max-width: 1024px) {
+	:is(#hrsdMenu) .lang-link {
+		color: var(--color-text);
+		max-width: fit-content;
+		max-height: fit-content;
+		position: fixed;
+		inset: 35px;
+		left: 4vw;
+
+		&::after {
+			content: none;
+		}
+	}
+
+	:is(#hrsdMenu) .lang-link:nth-last-child(2) {
+		z-index: 9;
+	}
+
+	:is(#hrsdMenu) .lang-link:last-child {
+		padding-left: 3rem;
+
+		&>a::after {
+			opacity: 1;
+			content: '/';
+			position: absolute;
+			color: var(--color-text);
+			transform: translateX(-23px);
+		}
+	}
+}
+
+
+:is(:is(#hrsdMenu) li.lang-link) a {
+	--lang-link-padding: .25rem .25rem;
+	padding: var(--lang-link-padding);
+
+	&::before {
+		padding: var(--lang-link-padding);
+	}
+
+	&:hover {
+		color: #fff;
+	}
+}
+
+:is(#hrsdMenu nav:nth-child(2)) li.lang-link:nth-last-child(2) {
+	padding-left: 1rem;
+}
+
+:is(#hrsdMenu nav:nth-child(2)) li.lang-link:last-child {
+	padding-left: 1.25rem;
+
+	&::after {
+		content: '/';
+		position: absolute;
+		color: #fff;
+		transform: translateX(-14px);
+	}
+}
+
+:is(#hrsdHeader.stickyOn) :is(#hrsdMenu) nav:nth-child(2) li.lang-link:last-child,
+:is(body.page-template-default, body.page-template-instalations, body.error404) :is(#hrsdMenu) nav:nth-child(2) li.lang-link:last-child {
+	&::after {
+		color: #222;
+	}
+}
+
 /* Toggle button */
 :is(#hrsdMenu) div[aria-label="Menu Toggle"] {
 	margin: 0;
@@ -1262,21 +1331,22 @@ textarea {
 	width: 0 !important;
 	margin: 0;
 	opacity: 0;
-	filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+	box-shadow: 0 10px 15px -3px rgba(97, 97, 97, 0.1), 0 4px 6px -4px rgba(78, 78, 78, 0.1);
 
 	& ul {
-		top: 15vh;
+		top: 6rem;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
-		padding-top: 25%;
+		padding-top: 15%;
 
 		& li>a {
 			padding: 1.25rem;
-			font-size: 1.25rem;
+			font-size: 1.1rem;
+			font-weight: 500;
 		}
 
-		& li::after {
+		& li:not(.lang-link):after {
 			content: '';
 			position: absolute;
 			width: 75%;
@@ -1289,10 +1359,10 @@ textarea {
 
 :is(#hrsdMenu) nav[aria-hidden="false"]:last-child {
 	width: 320px !important;
-	min-height: 100vh;
+	min-height: calc(100vh + 15px);
 	transform: translateX(-250px);
 	opacity: 1;
-	animation: swipe-left .3s cubic-bezier(0.72, 0.16, 0.345, 0.875);
+	animation: none;
 }
 
 @media (max-width: 640px) {
@@ -1314,6 +1384,36 @@ textarea {
 	}
 }
 
+/* 
+body[data-modal-open="true"] {
+	--dropdown-color: #000000ba;
+}
+
+body[data-modal-open="true"]:before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: var(--dropdown-color);
+	z-index: 50;
+}
+
+:is(body[data-modal-open="true"]) #hrsdHeader:not(.stickyOff) {
+	&>div:first-child {
+		z-index: -1;
+	}
+
+	&:after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: var(--dropdown-color);
+
+	}
+}
+
+:is(body[data-modal-open="true"]) #whiteLogo {
+	opacity: 0.3;
+} */
 
 /*Buttons*/
 .btn,
@@ -1548,7 +1648,7 @@ textarea {
 }
 
 :is(#instalationsGrid) .iso-grid {
-	height: 2870px;
+	height: 3000px;
 	opacity: 1;
 	transition: all .4s cubic-bezier(0.72, 0.16, 0.345, 0.875);
 	transform: translateY(0);
@@ -1802,4 +1902,134 @@ select.category-select {
 		top: -1px;
 	}
 
+}
+
+/**
+ * WhatsApp Button
+*/
+
+.float-buttons {
+	--fill-color: var(--e-global-color-primary);
+	z-index: 9999;
+	position: fixed;
+	left: 20px;
+	bottom: 20px;
+}
+
+@media (max-width: 768px) {
+
+	.float-buttons>a,
+	.bmb_msg_frame_default {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	@keyframes show-button-mobile {
+		from {
+			opacity: 0;
+			transform: scale(0);
+		}
+
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes hide-button-mobile {
+		from {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		to {
+			opacity: 0;
+			transform: scale(0);
+		}
+	}
+
+	.show-buttons>a,
+	.show-buttons {
+		animation: show-button-mobile .2s cubic-bezier(0.72, 0.16, 0.345, 0.875) both;
+	}
+
+	.hide-buttons>a,
+	.hide-buttons {
+		animation: hide-button-mobile .2s cubic-bezier(0.72, 0.16, 0.345, 0.875) both;
+	}
+}
+
+.callnow-button {
+	margin-bottom: .75rem;
+
+	&>svg {
+		scale: 0.8;
+	}
+}
+
+.float-buttons>a {
+	width: 4rem;
+	height: 4rem;
+	background: #fcfcfc;
+	padding: 1rem;
+	display: flex;
+	border-radius: 100%;
+	transition: all .3s cubic-bezier(0.72, 0.16, 0.345, 0.875);
+	box-shadow: 0px 64px 64px rgba(44, 63, 88, 0.05), 0px 0px 32px rgba(44, 63, 88, 0.05), 0px 16px 16px rgba(44, 63, 88, 0.03), 0px 8px 8px rgba(44, 63, 88, 0.03), 0px 4px 4px rgba(44, 63, 88, 0.03), 0px 2px 2px rgba(44, 63, 88, 0.04);
+
+	&:hover {
+		--fill-color: #fff;
+		box-shadow: 0px 64px 64px rgba(44, 63, 88, 0.05), 0px 0px 32px rgba(44, 63, 88, 0.05), 0px 16px 16px rgba(44, 63, 88, 0.03), 0px 8px 8px rgba(44, 63, 88, 0.03), 0px 4px 4px rgba(44, 63, 88, 0.03), 0px 2px 2px rgba(44, 63, 88, 0.04), inset 0 0 0 60px #c9a96a;
+	}
+}
+
+.float-buttons>a>svg {
+	width: 2.5rem;
+	fill: var(--fill-color);
+}
+
+
+@keyframes show-button {
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
+
+	10% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes translate-buttons {
+	to {
+		transform: translateY(-100px);
+	}
+}
+
+@media (min-width: 768px) {
+	a.callnow-button {
+		display: none;
+	}
+
+	.float-buttons {
+		left: 2vw;
+		bottom: 3rem;
+	}
+
+	@supports (animation-timeline: view()) {
+		@media (prefers-reduced-motion: no-preference) {
+			.float-buttons {
+				animation: translate-buttons linear both;
+				animation-timeline: view();
+				animation-range: calc(var(--document-height) / 2) calc(var(--document-height) / 1.2);
+			}
+
+			.float-buttons>a {
+				animation: show-button linear both;
+				animation-timeline: view();
+				animation-range: 10vh 200vh;
+			}
+		}
+	}
 }
