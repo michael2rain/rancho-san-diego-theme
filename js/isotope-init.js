@@ -37,6 +37,9 @@ const isotopeInit = () => {
     const grid = itemsContainer[0].querySelectorAll('.elementor-grid');
     grid[0].classList.add('iso-grid');
 
+    containerHeght = grid[0].offsetHeight;
+    grid[0].setAttribute('style', `--min-height: ${containerHeght + 120}px; `);
+
     const allItems = document.querySelectorAll('div[data-elementor-type="loop-item"]');
     allItems.forEach((_, i) => {
         const allItemsChild = allItems[i].childNodes[1].getAttribute('data-term');

@@ -1648,7 +1648,8 @@ body[data-modal-open="true"]:before {
 }
 
 :is(#instalationsGrid) .iso-grid {
-	height: 3000px;
+	height: var(--min-height);
+	min-height: fit-content;
 	opacity: 1;
 	transition: all .4s cubic-bezier(0.72, 0.16, 0.345, 0.875);
 	transform: translateY(0);
