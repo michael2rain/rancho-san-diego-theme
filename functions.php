@@ -50,6 +50,7 @@ function hotel_rancho_san_diego_theme_setup() {
 	register_nav_menus(
 		array(
 			'menu-1' => esc_html__( 'Primary', 'hotel-rancho-san-diego-theme' ),
+			'menu-2' => esc_html__( 'Footer', 'hotel-rancho-san-diego-theme' ),
 		)
 	);
 
