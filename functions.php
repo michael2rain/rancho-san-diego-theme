@@ -154,7 +154,7 @@ function hotel_rancho_san_diego_theme_scripts() {
 	}
 
 	// Instalations filter script
-    if ( is_page_template( 'instalations.php' ) ) {
+    if ( is_page_template( 'page-templates/instalations.php' ) ) {
 
 		$taxonomy = 'publicos-recomendados';
 		$taxonomy_terms = get_terms( $taxonomy, array(
@@ -169,7 +169,7 @@ function hotel_rancho_san_diego_theme_scripts() {
         ) );
     }
 
-	if ( is_page_template( 'spa.php' ) ) {
+	if ( is_page_template( 'page-templates/spa.php' ) ) {
 		wp_enqueue_script( 'spa-filter', get_template_directory_uri() . '/js/spa-filter.js', array(), _S_VERSION, true );
 	}
 }
