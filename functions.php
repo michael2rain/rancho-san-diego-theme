@@ -9,7 +9,7 @@
 
 if ( ! defined( '_S_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.9' );
+	define( '_S_VERSION', '1.1.0' );
 }
 
 /**
@@ -168,10 +168,6 @@ function hotel_rancho_san_diego_theme_scripts() {
             'names' => $taxonomy_terms
         ) );
     }
-
-	if ( is_page_template( 'page-templates/spa.php' ) ) {
-		wp_enqueue_script( 'spa-filter', get_template_directory_uri() . '/js/spa-filter.js', array(), _S_VERSION, true );
-	}
 }
 add_action( 'wp_enqueue_scripts', 'hotel_rancho_san_diego_theme_scripts' );
 
